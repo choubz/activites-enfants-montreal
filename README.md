@@ -23,3 +23,9 @@ La colonne **Fiche (lien)** de chaque repère pointe vers la fiche correspondant
 - Les informations viennent de publications TikTok, de sites officiels et de quelques sources tierces. Chaque fiche indique son statut (confirmé ou à vérifier). « n.d. » = non disponible, rien n'a été deviné.
 - 13 fiches n'ont pas de repère : adresse inconnue ou lieu non précis (voir les fiches sans repère sur la page).
 - Les prix et horaires changent : confirmer avant de se déplacer.
+
+## Régénérer le site
+
+Les sources sont dans `src/` (`data.py` : les fiches, `template.html` : la page, `build.py` : le générateur).
+Depuis la racine du dépôt : `python3 -I src/build.py .` réécrit `index.html` et `carte.csv`.
+`aujourdhui.json` est mis à jour chaque matin par le workflow n8n « Activités enfants du jour (Montréal) ».

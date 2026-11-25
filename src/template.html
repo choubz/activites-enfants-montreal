@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montréal en famille, en un coup d'œil – activités enfants</title>
+<meta name="description" content="Liste d'activités pour enfants sur l'île de Montréal : musées, patinoires, plages, parcs, jeux d'eau. Filtres par âge, gratuité et statut de vérification.">
+<style>
+:root{--bg:#faf6ee;--card:#fff;--ink:#17181c;--mute:#5d6470;--line:#e6dfd0;--accent:#e4572e;--teal:#157f7f;--ok:#17703f;--okbg:#dff3e7;--warn:#8a5200;--warnbg:#ffe9c2;--free:#0d5a8a;--freebg:#dcedf9;
+--p-tt:#f6cf3a;--p-web:#bfe3df;--p-parc:#cfe8b8;--pill:#17181c;--pilltx:#fff;--shadow:0 1px 0 rgba(0,0,0,.04),0 6px 18px rgba(40,30,10,.07)}
+*{box-sizing:border-box}
+html{color-scheme:light}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--accent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px 56px}
+.hero{padding:26px 0 10px;position:relative}
+body{border-style:solid;border-width:10px 0;border-image:linear-gradient(90deg,#e4572e,#f6cf3a,#157f7f,#1d5fbf) 1}
+.top{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:6px 34px 26px;margin:22px 0 0}
+.eyebrow{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.02;margin:6px 0 8px;font-weight:800;letter-spacing:-.025em;text-transform:uppercase}
+h1 span{display:block;color:var(--teal);font-size:.55em;letter-spacing:-.01em;font-weight:700}
+.sub{color:var(--mute);margin:0;max-width:72ch}
+.legend{font-size:.84rem;color:var(--mute);margin:10px 0 0;max-width:80ch}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--pill);color:var(--pilltx);white-space:nowrap}
+.pill.free{background:var(--freebg);color:var(--free)}
+.pill.open{background:var(--okbg);color:var(--ok)}
+.pill.reg{background:var(--warnbg);color:var(--warn)}
+.pill.soft{background:transparent;color:var(--mute);border:1px solid var(--line)}
+/* Aujourd'hui */
+.today{margin:20px 0 0;padding:20px 0 0;border-top:2px solid var(--ink)}
+.todayhead{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.daybox{display:flex;align-items:baseline;gap:8px;line-height:1}
+.daybox .num{font-size:3.4rem;font-weight:800;letter-spacing:-.04em}
+.daybox .mon{font-size:1.2rem;font-weight:800;text-transform:uppercase;color:var(--accent)}
+.daybox .wd{font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);align-self:center}
+.todayhead h2{margin:0;font-size:1.1rem}
+.today .meta{font-size:.86rem;color:var(--mute);margin:0 0 12px}
+.evlist{list-style:none;margin:0;padding:0;display:grid;gap:4px 28px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.ev{position:relative;padding:10px 0 12px 20px;border-left:3px solid var(--teal)}
+.ev:nth-child(3n+2){border-color:var(--accent)}
+.ev:nth-child(3n){border-color:#e0b000}
+.ev:before{content:"";position:absolute;left:-7px;top:16px;width:11px;height:11px;border-radius:50%;background:inherit;background:var(--card);border:3px solid currentColor;color:var(--teal)}
+.ev:nth-child(3n+2):before{color:var(--accent)}
+.ev:nth-child(3n):before{color:#e0b000}
+.ev .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.ev .t{font-size:1.05rem;font-weight:700;line-height:1.25;margin:0 0 2px}
+.ev .t a{color:inherit;text-decoration:none}
+.ev .t a:hover{color:var(--accent);text-decoration:underline}
+.ev .w{font-size:.88rem;color:var(--mute)}
+.ev .go{font-size:.84rem;font-weight:600;text-decoration:none;display:inline-block;margin-top:4px}
+.today details{margin-top:10px}
+.today summary{cursor:pointer;font-weight:700;color:var(--accent);padding:6px 0}
+.todaysrc{font-size:.78rem;color:var(--mute);margin:10px 0 0}
+/* Carte */
+section.map{margin:34px 0 10px}
+h2.big{font-size:1.5rem;margin:0 0 12px;font-weight:800;letter-spacing:-.02em;text-transform:uppercase}
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.mapbox iframe{display:block;width:100%;height:480px;border:0}
+.mapbox p{padding:16px;margin:0;color:var(--mute)}
+/* Filtres */
+.filters{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.filters label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);display:block;margin-bottom:2px}
+.filters input[type=search],.filters select{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}
+.filters .chk{display:flex;gap:7px;align-items:center;padding:9px 0}
+.filters .chk label{margin:0;text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:500;color:var(--ink)}
+.count{font-size:.9rem;color:var(--mute);margin:14px 0 0}
+/* Sections en panneaux colorés */
+.panel{border-radius:26px;padding:18px 16px 8px;margin:22px 0;background:var(--p-tt)}
+.panel.sec-web{background:var(--p-web)}
+.panel.sec-parc{background:var(--p-parc)}
+.panel>h2{margin:0 0 14px 4px;font-size:1.1rem;display:flex;gap:10px;align-items:center;padding:0}
+.panel>h2 .n{font-weight:600;color:var(--mute);font-size:.9rem}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));padding-bottom:10px}
+.card{background:var(--card);border-radius:18px;padding:16px 16px 14px;scroll-margin-top:150px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card:target{outline:3px solid var(--accent);outline-offset:3px}
+.card h3{font-size:1.08rem;line-height:1.25;margin:8px 0 8px;display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+.card h3 a.anc{color:var(--mute);text-decoration:none;font-weight:400;font-size:.9rem}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.cat{background:hsl(var(--h) 70% 90%);color:hsl(var(--h) 60% 22%)}
+.facts{display:grid;grid-template-columns:78px 1fr;gap:5px 10px;margin:0;font-size:.9rem;border-top:1px solid var(--line);padding-top:10px}
+.facts dt{color:var(--mute);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.facts dd{margin:0;overflow-wrap:anywhere}
+.facts dd.nd{color:var(--mute)}
+.notes{font-size:.86rem;color:var(--mute);margin:10px 0 0}
+.src{font-size:.84rem;margin:auto 0 0;padding-top:10px}
+.src a{margin-right:10px;display:inline-block}
+.empty{padding:24px;text-align:center;color:var(--mute)}
+footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
+@media (max-width:520px){.facts{grid-template-columns:1fr}.mapbox iframe{height:380px}.evlist{grid-template-columns:1fr}.daybox .num{font-size:2.8rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top">
+<header class="hero">
+  <span class="eyebrow">Activités enfants · île de Montréal · gratuit ou pas cher</span>
+  <h1>Montréal en famille,<span>en un coup d'œil</span></h1>
+  <p class="sub">Des idées de sorties pour les enfants sur l'île de Montréal : musées, patinoires, plages, parcs et jeux d'eau. Une partie vient de vidéos TikTok, recoupées avec les sites officiels quand c'était possible. Chaque fiche indique sa source et dit clairement ce qui reste à confirmer. Mis à jour le 25 novembre 2026.</p>
+  <p class="legend">Pour lire les fiches : † source tierce (pas le site officiel) · ‡ vu seulement sur TikTok · « n.d. » information non disponible, rien n'est deviné. Les prix et les horaires changent : vérifiez avant de partir.</p>
+</header>
+
+<section class="today" id="aujourdhui" aria-live="polite">
+  <div class="todayhead">
+    <div class="daybox"><span class="wd" id="todayWd"></span><span class="num" id="todayNum">–</span><span class="mon" id="todayMon"></span></div>
+    <h2>Aujourd'hui pour les enfants</h2>
+  </div>
+  <p class="meta" id="todayMeta">Chargement…</p>
+  <ul class="evlist" id="todayList"></ul>
+</section>
+</div>
+
+<section class="map" id="carte">
+  <h2 class="big">Carte</h2>
+  <div class="mapbox" id="mapbox"></div>
+</section>
+
+<div class="filters" id="filters">
+  <div><label for="q">Recherche</label><input type="search" id="q" placeholder="nom, quartier, type…"></div>
+  <div><label for="fsec">Section</label><select id="fsec"><option value="">Toutes</option></select></div>
+  <div><label for="fcat">Catégorie</label><select id="fcat"><option value="">Toutes</option></select></div>
+  <div><label for="fage">Âge</label><select id="fage"><option value="">Tous</option><option value="p">Tout-petits (0-5 ans)</option><option value="s">6-12 ans</option></select></div>
+  <div class="chk"><input type="checkbox" id="ffree"><label for="ffree">Gratuit</label></div>
+  <div class="chk"><input type="checkbox" id="fok"><label for="fok">Confirmés seulement</label></div>
+</div>
+<p class="count" id="count" aria-live="polite"></p>
+<main id="list"></main>
+
+<footer>
+  <p>Les filtres d'âge et de gratuité reprennent ce que disent les sources, sans déduction : une fiche dont l'âge est « n.d. » n'apparaît pas dans les filtres d'âge. Les fiches « tous âges » apparaissent dans les deux.</p>
+  <p>Données : <a href="carte.csv">carte.csv</a> (import Google My Maps).</p>
+</footer>
+</div>
+
+<script>
+// Collez ici le lien « Intégrer sur mon site » de Google My Maps (l'URL de l'attribut src de l'iframe).
+const MAP_EMBED_URL = "https://www.google.com/maps/d/embed?mid=1a4JOCDOaCCZi3QWQTCWjOeaYcWbeJ2Y&ehbc=157F7F";
+
+const DATA = __DATA__;
+const SRC = __SRC__;
+const $ = id => document.getElementById(id);
+
+function el(tag, cls, text){const e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e;}
+
+
+// Activités du jour (fichier mis à jour chaque matin par n8n)
+(function(){
+  const meta = $("todayMeta"), list = $("todayList");
+  const todayStr = new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto"}).format(new Date());
+  function head(ds){
+    const d = new Date((ds||todayStr)+"T12:00:00");
+    $("todayNum").textContent = d.toLocaleDateString("fr-CA",{day:"numeric"});
+    $("todayMon").textContent = d.toLocaleDateString("fr-CA",{month:"short"}).replace(".","");
+    $("todayWd").textContent = d.toLocaleDateString("fr-CA",{weekday:"long"});
+  }
+  head(todayStr);
+  fetch("aujourdhui.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
+    const ev = Array.isArray(d.evenements)?d.evenements:[];
+    const stale = d.date && d.date!==todayStr;
+    if(stale) head(d.date);
+    if(!ev.length){meta.textContent="Aucune activité pour enfants trouvée aujourd'hui dans le calendrier de la Ville.";return;}
+    meta.textContent = (stale?"Données du "+d.date+", pas encore mises à jour aujourd'hui : à confirmer. ":"")+ev.length+" activité"+(ev.length>1?"s":"")+" au calendrier de la Ville. Les données n'ont pas d'horaire : ouvrez la fiche.";
+    function pill(txt,cls){return el("span","pill "+cls,txt);}
+    function item(e){
+      const li = el("li","ev");
+      const ps = el("div","pills");
+      if(/gratuit/i.test(e.cout||"")) ps.appendChild(pill("Gratuit","free"));
+      else if(e.cout) ps.appendChild(pill(e.cout,"reg"));
+      if(/libre/i.test(e.inscription||"")) ps.appendChild(pill("Entrée libre","open"));
+      else if(/inscription/i.test(e.inscription||"")) ps.appendChild(pill("Sur inscription","reg"));
+      if(e.public) ps.appendChild(pill(e.public,"soft"));
+      li.appendChild(ps);
+      const t = el("p","t");
+      const ok = /^https:\/\/(www\.)?montreal\.ca\//.test(e.url||"");
+      if(ok){const a=el("a",null,e.titre||"Sans titre");a.href=e.url;a.target="_blank";a.rel="noopener";t.appendChild(a);}else t.textContent=e.titre||"Sans titre";
+      li.appendChild(t);
+      const w=[e.arrondissement,e.lieu].filter(Boolean).join(" · ");
+      if(w) li.appendChild(el("div","w",w));
+      if(ok){const g=el("a","go","Voir la fiche officielle →");g.href=e.url;g.target="_blank";g.rel="noopener";li.appendChild(g);}
+      return li;
+    }
+    ev.slice(0,8).forEach(e=>list.appendChild(item(e)));
+    if(ev.length>8){
+      const det=el("details"); det.appendChild(el("summary",null,"Voir les "+(ev.length-8)+" autres"));
+      const ul=el("ul","evlist"); ev.slice(8).forEach(e=>ul.appendChild(item(e))); det.appendChild(ul);
+      $("aujourdhui").appendChild(det);
+    }
+    $("aujourdhui").appendChild(el("p","todaysrc","Source : "+(d.source||"Ville de Montréal")+"."));
+  }).catch(()=>{meta.textContent="Activités du jour indisponibles pour le moment.";});
+})();
+
+// Carte
+(function(){
+  const box = $("mapbox");
+  if (MAP_EMBED_URL) {
+    const f = document.createElement("iframe");
+    f.src = MAP_EMBED_URL; f.title = "Carte des activités"; f.loading = "lazy";
+    f.setAttribute("allowfullscreen", "");
+    box.appendChild(f);
+  } else {
+    box.appendChild(el("p", null, "La carte sera ajoutée ici. En attendant, chaque fiche ci-dessous a son adresse."));
+  }
+})();
+
+// Filtres : options
+const secSel = $("fsec"), catSel = $("fcat");
+Object.keys(SRC).forEach(k => { const o = el("option", null, SRC[k]); o.value = k; secSel.appendChild(o); });
+[...new Set(DATA.map(d => d.cat))].sort((a,b)=>a.localeCompare(b,"fr")).forEach(c => { const o = el("option", null, c); o.value = c; catSel.appendChild(o); });
+
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){return u;}}
+function isOk(d){return /^confirmé/.test(d.statut);}
+function isFree(d){return d.free === "oui" || d.free === "enfants";}
+
+function hue(str){let h=0;for(const c of str)h=(h*31+c.charCodeAt(0))%360;return h;}
+function card(d){
+  const c = el("article", "card"); c.id = d.id;
+  const bs = el("div", "badges");
+  const cp = el("span", "pill cat", d.cat); cp.style.setProperty("--h", hue(d.cat)); bs.appendChild(cp);
+  if (d.free === "oui") bs.appendChild(el("span", "pill free", "Gratuit"));
+  if (d.free === "enfants") bs.appendChild(el("span", "pill free", "Gratuit enfants"));
+  bs.appendChild(el("span", "pill " + (isOk(d) ? "open" : "reg"), isOk(d) ? d.statut : "À vérifier" + (d.src !== "tt" && d.statut !== "à vérifier" ? " : " + d.statut.replace(/^à vérifier\s*/,"") : "")));
+  if (!d.placed) bs.appendChild(el("span", "pill soft", "Hors carte"));
+  c.appendChild(bs);
+  const h = el("h3"); h.appendChild(el("span", null, d.nom));
+  const a = el("a", "anc", "#"); a.href = "#" + d.id; a.setAttribute("aria-label", "Lien vers cette fiche"); h.appendChild(a);
+  c.appendChild(h);
+  const dl = el("dl", "facts");
+  [["Type", d.typ], ["Lieu", d.lieu], ["Âge", d.age], ["Prix", d.prix], ["Horaires", d.saison]].forEach(([k, v]) => {
+    dl.appendChild(el("dt", null, k)); dl.appendChild(el("dd", v ? null : "nd", v || "n.d."));
+  });
+  c.appendChild(dl);
+  if (d.notes) c.appendChild(el("p", "notes", d.notes));
+  if (d.liens.length) {
+    const s = el("p", "src");
+    s.appendChild(document.createTextNode(d.src === "tt" ? "Vidéos TikTok" + (d.compte ? " (" + d.compte + ") : " : " : ") : "Sources : "));
+    d.liens.forEach((u, i) => {
+      const l = el("a", null, d.src === "tt" ? "vidéo " + (d.liens.length > 1 ? (i + 1) : "") : host(u));
+      l.href = u; l.target = "_blank"; l.rel = "noopener noreferrer"; s.appendChild(l);
+    });
+    c.appendChild(s);
+  }
+  return c;
+}
+
+function render(){
+  const q = $("q").value.trim().toLowerCase();
+  const sec = secSel.value, cat = catSel.value, age = $("fage").value, free = $("ffree").checked, ok = $("fok").checked;
+  const list = $("list"); list.textContent = "";
+  let n = 0;
+  Object.keys(SRC).forEach(k => {
+    if (sec && sec !== k) return;
+    const items = DATA.filter(d => d.src === k)
+      .filter(d => !cat || d.cat === cat)
+      .filter(d => !age || d.tags.includes(age) || d.tags.includes("t"))
+      .filter(d => !free || isFree(d))
+      .filter(d => !ok || isOk(d))
+      .filter(d => !q || (d.nom + " " + d.typ + " " + d.lieu + " " + d.cat + " " + d.notes).toLowerCase().includes(q));
+    if (!items.length) return;
+    const pn = el("section", "panel sec-" + k);
+    const h2 = el("h2"); h2.appendChild(el("span", "pill", SRC[k])); h2.appendChild(el("span", "n", items.length + " fiche" + (items.length > 1 ? "s" : "")));
+    pn.appendChild(h2);
+    const gr = el("div", "grid");
+    items.forEach(d => gr.appendChild(card(d)));
+    pn.appendChild(gr); list.appendChild(pn);
+    n += items.length;
+  });
+  if (!n) list.appendChild(el("p", "empty", "Aucune fiche ne correspond à ces filtres."));
+  $("count").textContent = n + " fiche" + (n > 1 ? "s" : "") + " sur " + DATA.length;
+}
+
+["q","fsec","fcat","fage","ffree","fok"].forEach(id => $(id).addEventListener("input", render));
+
+// Un lien d'ancre (depuis la carte) doit toujours trouver sa fiche : on remet les filtres à zéro si besoin.
+function goHash(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id || id === "carte") return;
+  if (!document.getElementById(id) && DATA.some(d => d.id === id)) {
+    $("q").value = ""; secSel.value = ""; catSel.value = ""; $("fage").value = ""; $("ffree").checked = false; $("fok").checked = false;
+    render();
+  }
+  const t = document.getElementById(id);
+  if (t) t.scrollIntoView();
+}
+render();
+goHash();
+window.addEventListener("hashchange", goHash);
+</script>
+</body>
+</html>
