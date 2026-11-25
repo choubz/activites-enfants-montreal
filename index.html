@@ -44,6 +44,15 @@ dd{margin:0;overflow-wrap:anywhere}
 .empty{padding:24px;text-align:center;color:var(--mute)}
 footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
 @media (max-width:520px){dl{grid-template-columns:1fr}dt{margin-top:4px}.mapbox iframe{height:380px}}
+.today{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:14px 0}
+.today h2{margin:0 0 4px;font-size:1.1rem}
+.today .meta{font-size:.85rem;color:var(--mute);margin:0 0 8px}
+.today ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.today li{border-top:1px solid var(--line);padding-top:8px}
+.today li:first-child{border-top:0;padding-top:0}
+.today .t{font-weight:600}
+.today .d{font-size:.88rem;color:var(--mute)}
+.today details summary{cursor:pointer;color:var(--accent);margin-top:8px}
 </style>
 </head>
 <body>
@@ -53,6 +62,12 @@ footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
   <p class="sub">Liste de travail : TikTok « montreal activite enfants », sites officiels (montreal.ca, Espace pour la vie, musées) et quelques sources tierces. Mise à jour : 25 novembre 2026.</p>
   <p class="legend">† = source tierce (pas le site officiel) · ‡ = info vue seulement sur TikTok · « n.d. » = non disponible, rien n'a été deviné. Les prix et horaires changent : confirmez avant de vous déplacer.</p>
 </header>
+
+<section class="today" id="aujourdhui" aria-live="polite">
+  <h2>Aujourd'hui</h2>
+  <p class="meta" id="todayMeta">Chargement…</p>
+  <ul id="todayList"></ul>
+</section>
 
 <section class="map" id="carte">
   <h2>Carte</h2>
@@ -85,6 +100,36 @@ const SRC = {"tt": "Activités (TikTok + sites officiels)", "web": "Ajouts web",
 const $ = id => document.getElementById(id);
 
 function el(tag, cls, text){const e=document.createElement(tag); if(cls)e.className=cls; if(text!=null)e.textContent=text; return e;}
+
+
+// Activités du jour (fichier mis à jour chaque matin par n8n)
+(function(){
+  const meta = $("todayMeta"), list = $("todayList");
+  const todayStr = new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto"}).format(new Date());
+  fetch("aujourdhui.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
+    const ev = Array.isArray(d.evenements)?d.evenements:[];
+    if(!ev.length){meta.textContent="Aucune activité pour enfants trouvée aujourd'hui dans le calendrier de la Ville.";return;}
+    const stale = d.date && d.date!==todayStr;
+    meta.textContent = (stale?"Données du "+d.date+" (pas encore mises à jour aujourd'hui). ":"")+ev.length+" activité(s) pour enfants au calendrier de la Ville, "+(stale?"à confirmer.":"aujourd'hui.")+" Pas d'horaire dans les données : ouvrez la fiche.";
+    const show = ev.slice(0,8);
+    function item(e){
+      const li = el("li");
+      const t = el("div","t");
+      if(/^https:\/\/(www\.)?montreal\.ca\//.test(e.url||"")){const a=el("a",null,e.titre||"Sans titre");a.href=e.url;a.target="_blank";a.rel="noopener";t.appendChild(a);}else t.textContent=e.titre||"Sans titre";
+      li.appendChild(t);
+      const bits=[e.public,e.cout,e.inscription,e.arrondissement,e.lieu].filter(Boolean);
+      if(bits.length) li.appendChild(el("div","d",bits.join(" · ")));
+      return li;
+    }
+    show.forEach(e=>list.appendChild(item(e)));
+    if(ev.length>show.length){
+      const det=el("details"); det.appendChild(el("summary",null,"Voir les "+(ev.length-show.length)+" autres"));
+      const ul=el("ul"); ev.slice(show.length).forEach(e=>ul.appendChild(item(e))); det.appendChild(ul);
+      list.parentNode.appendChild(det);
+    }
+    list.parentNode.appendChild(el("p","meta","Source : "+(d.source||"Ville de Montréal")+"."));
+  }).catch(()=>{meta.textContent="Activités du jour indisponibles pour le moment.";});
+})();
 
 // Carte
 (function(){
