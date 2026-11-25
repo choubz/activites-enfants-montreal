@@ -6,71 +6,111 @@
 <title>Activités enfants – île de Montréal</title>
 <meta name="description" content="Liste d'activités pour enfants sur l'île de Montréal : musées, patinoires, plages, parcs, jeux d'eau. Filtres par âge, gratuité et statut de vérification.">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2430;--mute:#5b6675;--line:#dde2e9;--accent:#1f5fbf;--ok:#1d7a46;--okbg:#e4f4eb;--warn:#8a5a00;--warnbg:#fff1d6;--free:#0f5c8c;--freebg:#e0f0fa}
-@media (prefers-color-scheme:dark){:root{--bg:#12161c;--card:#1b2129;--ink:#e8edf3;--mute:#9aa6b5;--line:#2b3441;--accent:#7db0ff;--ok:#6fd49b;--okbg:#17352488;--warn:#f0c26a;--warnbg:#3b2f1488;--free:#7cc4f0;--freebg:#14304488}}
+:root{--bg:#faf6ee;--card:#fff;--ink:#17181c;--mute:#5d6470;--line:#e6dfd0;--accent:#e4572e;--teal:#157f7f;--ok:#17703f;--okbg:#dff3e7;--warn:#8a5200;--warnbg:#ffe9c2;--free:#0d5a8a;--freebg:#dcedf9;
+--p-tt:#f6cf3a;--p-web:#bfe3df;--p-parc:#cfe8b8;--pill:#17181c;--pilltx:#fff;--shadow:0 1px 0 rgba(0,0,0,.04),0 6px 18px rgba(40,30,10,.07)}
+@media (prefers-color-scheme:dark){:root{--bg:#101318;--card:#1b2029;--ink:#eef1f5;--mute:#a0a9b6;--line:#2a313c;--accent:#ff7a52;--teal:#5cc9c9;--ok:#6fd49b;--okbg:#17352499;--warn:#f0c26a;--warnbg:#3b2f1499;--free:#7cc4f0;--freebg:#14304499;
+--p-tt:#4a4012;--p-web:#16393a;--p-parc:#24391a;--pill:#eef1f5;--pilltx:#101318;--shadow:none}}
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
 a{color:var(--accent)}
-.wrap{max-width:1000px;margin:0 auto;padding:0 16px 48px}
-header{padding:28px 0 8px}
-h1{font-size:1.7rem;margin:0 0 4px}
-.sub{color:var(--mute);margin:0}
-.legend{font-size:.85rem;color:var(--mute);margin:10px 0 0}
-section.map{margin:20px 0}
-.mapbox{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px 56px}
+.hero{padding:34px 0 10px;position:relative}
+.hero:before{content:"";position:absolute;inset:0 -9999px auto -9999px;height:10px;background:linear-gradient(90deg,#e4572e,#f6cf3a,#157f7f,#1d5fbf)}
+.eyebrow{display:inline-block;margin-top:14px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.02;margin:6px 0 8px;font-weight:800;letter-spacing:-.025em;text-transform:uppercase}
+h1 span{display:block;color:var(--mute);font-size:.55em;letter-spacing:-.01em;font-weight:700}
+.sub{color:var(--mute);margin:0;max-width:72ch}
+.legend{font-size:.84rem;color:var(--mute);margin:10px 0 0;max-width:80ch}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--pill);color:var(--pilltx);white-space:nowrap}
+.pill.free{background:var(--freebg);color:var(--free)}
+.pill.open{background:var(--okbg);color:var(--ok)}
+.pill.reg{background:var(--warnbg);color:var(--warn)}
+.pill.soft{background:transparent;color:var(--mute);border:1px solid var(--line)}
+/* Aujourd'hui */
+.today{margin:22px 0 8px;background:var(--card);border-radius:22px;padding:20px 20px 16px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.todayhead{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.daybox{display:flex;align-items:baseline;gap:8px;line-height:1}
+.daybox .num{font-size:3.4rem;font-weight:800;letter-spacing:-.04em}
+.daybox .mon{font-size:1.2rem;font-weight:800;text-transform:uppercase;color:var(--accent)}
+.daybox .wd{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);margin-top:4px}
+.todayhead h2{margin:0;font-size:1.1rem}
+.today .meta{font-size:.86rem;color:var(--mute);margin:0 0 12px}
+.evlist{list-style:none;margin:0;padding:0;display:grid;gap:4px 28px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.ev{position:relative;padding:10px 0 12px 20px;border-left:3px solid var(--teal)}
+.ev:nth-child(3n+2){border-color:var(--accent)}
+.ev:nth-child(3n){border-color:#e0b000}
+.ev:before{content:"";position:absolute;left:-7px;top:16px;width:11px;height:11px;border-radius:50%;background:inherit;background:var(--bg);border:3px solid currentColor;color:var(--teal)}
+.ev:nth-child(3n+2):before{color:var(--accent)}
+.ev:nth-child(3n):before{color:#e0b000}
+.ev .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.ev .t{font-size:1.05rem;font-weight:700;line-height:1.25;margin:0 0 2px}
+.ev .t a{color:inherit;text-decoration:none}
+.ev .t a:hover{color:var(--accent);text-decoration:underline}
+.ev .w{font-size:.88rem;color:var(--mute)}
+.ev .go{font-size:.84rem;font-weight:600;text-decoration:none;display:inline-block;margin-top:4px}
+.today details{margin-top:10px}
+.today summary{cursor:pointer;font-weight:700;color:var(--accent);padding:6px 0}
+.todaysrc{font-size:.78rem;color:var(--mute);margin:10px 0 0}
+/* Carte */
+section.map{margin:34px 0 10px}
+h2.big{font-size:1.5rem;margin:0 0 12px;font-weight:800;letter-spacing:-.02em;text-transform:uppercase}
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
 .mapbox iframe{display:block;width:100%;height:480px;border:0}
 .mapbox p{padding:16px;margin:0;color:var(--mute)}
-.filters{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
-.filters label{font-size:.78rem;color:var(--mute);display:block}
-.filters input[type=search],.filters select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
-.filters .chk{display:flex;gap:6px;align-items:center;font-size:.92rem;color:var(--ink);padding:8px 0}
-.count{font-size:.9rem;color:var(--mute);margin:12px 0}
-h2{font-size:1.25rem;margin:28px 0 10px;padding-top:6px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:0 0 12px;scroll-margin-top:150px}
-.card:target{outline:3px solid var(--accent);outline-offset:2px}
-.card h3{font-size:1.05rem;margin:0 0 6px;display:flex;gap:8px;align-items:baseline}
+/* Filtres */
+.filters{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.filters label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);display:block;margin-bottom:2px}
+.filters input[type=search],.filters select{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}
+.filters .chk{display:flex;gap:7px;align-items:center;padding:9px 0}
+.filters .chk label{margin:0;text-transform:none;letter-spacing:0;font-size:.92rem;font-weight:500;color:var(--ink)}
+.count{font-size:.9rem;color:var(--mute);margin:14px 0 0}
+/* Sections en panneaux colorés */
+.panel{border-radius:26px;padding:18px 16px 8px;margin:22px 0;background:var(--p-tt)}
+.panel.sec-web{background:var(--p-web)}
+.panel.sec-parc{background:var(--p-parc)}
+.panel>h2{margin:0 0 14px 4px;font-size:1.1rem;display:flex;gap:10px;align-items:center;padding:0}
+.panel>h2 .n{font-weight:600;color:var(--mute);font-size:.9rem}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));padding-bottom:10px}
+.card{background:var(--card);border-radius:18px;padding:16px 16px 14px;scroll-margin-top:150px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card:target{outline:3px solid var(--accent);outline-offset:3px}
+.card h3{font-size:1.08rem;line-height:1.25;margin:8px 0 8px;display:flex;gap:8px;align-items:baseline;justify-content:space-between}
 .card h3 a.anc{color:var(--mute);text-decoration:none;font-weight:400;font-size:.9rem}
-.badges{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
-.b{font-size:.74rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
-.b.ok{background:var(--okbg);color:var(--ok);border-color:transparent}
-.b.warn{background:var(--warnbg);color:var(--warn);border-color:transparent}
-.b.free{background:var(--freebg);color:var(--free);border-color:transparent}
-dl{display:grid;grid-template-columns:110px 1fr;gap:3px 12px;margin:0;font-size:.93rem}
-dt{color:var(--mute)}
-dd{margin:0;overflow-wrap:anywhere}
-.notes{font-size:.88rem;color:var(--mute);margin:8px 0 0}
-.src{font-size:.85rem;margin:8px 0 0}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.cat{background:hsl(var(--h) 70% 90%);color:hsl(var(--h) 60% 22%)}
+@media (prefers-color-scheme:dark){.cat{background:hsl(var(--h) 35% 24%);color:hsl(var(--h) 80% 85%)}}
+.facts{display:grid;grid-template-columns:78px 1fr;gap:5px 10px;margin:0;font-size:.9rem;border-top:1px solid var(--line);padding-top:10px}
+.facts dt{color:var(--mute);font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.facts dd{margin:0;overflow-wrap:anywhere}
+.facts dd.nd{color:var(--mute)}
+.notes{font-size:.86rem;color:var(--mute);margin:10px 0 0}
+.src{font-size:.84rem;margin:auto 0 0;padding-top:10px}
 .src a{margin-right:10px;display:inline-block}
 .empty{padding:24px;text-align:center;color:var(--mute)}
 footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
-@media (max-width:520px){dl{grid-template-columns:1fr}dt{margin-top:4px}.mapbox iframe{height:380px}}
-.today{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:14px 0}
-.today h2{margin:0 0 4px;font-size:1.1rem}
-.today .meta{font-size:.85rem;color:var(--mute);margin:0 0 8px}
-.today ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.today li{border-top:1px solid var(--line);padding-top:8px}
-.today li:first-child{border-top:0;padding-top:0}
-.today .t{font-weight:600}
-.today .d{font-size:.88rem;color:var(--mute)}
-.today details summary{cursor:pointer;color:var(--accent);margin-top:8px}
+@media (max-width:520px){.facts{grid-template-columns:1fr}.mapbox iframe{height:380px}.evlist{grid-template-columns:1fr}.daybox .num{font-size:2.8rem}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <h1>Activités enfants – île de Montréal</h1>
+<header class="hero">
+  <span class="eyebrow">Famille · Montréal · gratuit ou pas cher</span>
+  <h1>Activités enfants<span>île de Montréal</span></h1>
   <p class="sub">Liste de travail : TikTok « montreal activite enfants », sites officiels (montreal.ca, Espace pour la vie, musées) et quelques sources tierces. Mise à jour : 25 novembre 2026.</p>
   <p class="legend">† = source tierce (pas le site officiel) · ‡ = info vue seulement sur TikTok · « n.d. » = non disponible, rien n'a été deviné. Les prix et horaires changent : confirmez avant de vous déplacer.</p>
 </header>
 
 <section class="today" id="aujourdhui" aria-live="polite">
-  <h2>Aujourd'hui</h2>
+  <div class="todayhead">
+    <div class="daybox"><span class="num" id="todayNum">–</span><span><span class="mon" id="todayMon"></span><span class="wd" id="todayWd"></span></span></div>
+    <h2>Aujourd'hui pour les enfants</h2>
+  </div>
   <p class="meta" id="todayMeta">Chargement…</p>
-  <ul id="todayList"></ul>
+  <ul class="evlist" id="todayList"></ul>
 </section>
 
 <section class="map" id="carte">
-  <h2>Carte</h2>
+  <h2 class="big">Carte</h2>
   <div class="mapbox" id="mapbox"></div>
 </section>
 
@@ -79,8 +119,8 @@ footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
   <div><label for="fsec">Section</label><select id="fsec"><option value="">Toutes</option></select></div>
   <div><label for="fcat">Catégorie</label><select id="fcat"><option value="">Toutes</option></select></div>
   <div><label for="fage">Âge</label><select id="fage"><option value="">Tous</option><option value="p">Tout-petits (0-5 ans)</option><option value="s">6-12 ans</option></select></div>
-  <div class="chk"><input type="checkbox" id="ffree"><label for="ffree" style="font-size:.92rem;color:inherit">Gratuit</label></div>
-  <div class="chk"><input type="checkbox" id="fok"><label for="fok" style="font-size:.92rem;color:inherit">Confirmés seulement</label></div>
+  <div class="chk"><input type="checkbox" id="ffree"><label for="ffree">Gratuit</label></div>
+  <div class="chk"><input type="checkbox" id="fok"><label for="fok">Confirmés seulement</label></div>
 </div>
 <p class="count" id="count" aria-live="polite"></p>
 <main id="list"></main>
@@ -106,28 +146,45 @@ function el(tag, cls, text){const e=document.createElement(tag); if(cls)e.classN
 (function(){
   const meta = $("todayMeta"), list = $("todayList");
   const todayStr = new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto"}).format(new Date());
+  function head(ds){
+    const d = new Date((ds||todayStr)+"T12:00:00");
+    $("todayNum").textContent = d.toLocaleDateString("fr-CA",{day:"numeric"});
+    $("todayMon").textContent = d.toLocaleDateString("fr-CA",{month:"short"}).replace(".","");
+    $("todayWd").textContent = d.toLocaleDateString("fr-CA",{weekday:"long"});
+  }
+  head(todayStr);
   fetch("aujourdhui.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(d=>{
     const ev = Array.isArray(d.evenements)?d.evenements:[];
-    if(!ev.length){meta.textContent="Aucune activité pour enfants trouvée aujourd'hui dans le calendrier de la Ville.";return;}
     const stale = d.date && d.date!==todayStr;
-    meta.textContent = (stale?"Données du "+d.date+" (pas encore mises à jour aujourd'hui). ":"")+ev.length+" activité(s) pour enfants au calendrier de la Ville, "+(stale?"à confirmer.":"aujourd'hui.")+" Pas d'horaire dans les données : ouvrez la fiche.";
-    const show = ev.slice(0,8);
+    if(stale) head(d.date);
+    if(!ev.length){meta.textContent="Aucune activité pour enfants trouvée aujourd'hui dans le calendrier de la Ville.";return;}
+    meta.textContent = (stale?"Données du "+d.date+", pas encore mises à jour aujourd'hui : à confirmer. ":"")+ev.length+" activité"+(ev.length>1?"s":"")+" au calendrier de la Ville. Les données n'ont pas d'horaire : ouvrez la fiche.";
+    function pill(txt,cls){return el("span","pill "+cls,txt);}
     function item(e){
-      const li = el("li");
-      const t = el("div","t");
-      if(/^https:\/\/(www\.)?montreal\.ca\//.test(e.url||"")){const a=el("a",null,e.titre||"Sans titre");a.href=e.url;a.target="_blank";a.rel="noopener";t.appendChild(a);}else t.textContent=e.titre||"Sans titre";
+      const li = el("li","ev");
+      const ps = el("div","pills");
+      if(/gratuit/i.test(e.cout||"")) ps.appendChild(pill("Gratuit","free"));
+      else if(e.cout) ps.appendChild(pill(e.cout,"reg"));
+      if(/libre/i.test(e.inscription||"")) ps.appendChild(pill("Entrée libre","open"));
+      else if(/inscription/i.test(e.inscription||"")) ps.appendChild(pill("Sur inscription","reg"));
+      if(e.public) ps.appendChild(pill(e.public,"soft"));
+      li.appendChild(ps);
+      const t = el("p","t");
+      const ok = /^https:\/\/(www\.)?montreal\.ca\//.test(e.url||"");
+      if(ok){const a=el("a",null,e.titre||"Sans titre");a.href=e.url;a.target="_blank";a.rel="noopener";t.appendChild(a);}else t.textContent=e.titre||"Sans titre";
       li.appendChild(t);
-      const bits=[e.public,e.cout,e.inscription,e.arrondissement,e.lieu].filter(Boolean);
-      if(bits.length) li.appendChild(el("div","d",bits.join(" · ")));
+      const w=[e.arrondissement,e.lieu].filter(Boolean).join(" · ");
+      if(w) li.appendChild(el("div","w",w));
+      if(ok){const g=el("a","go","Voir la fiche officielle →");g.href=e.url;g.target="_blank";g.rel="noopener";li.appendChild(g);}
       return li;
     }
-    show.forEach(e=>list.appendChild(item(e)));
-    if(ev.length>show.length){
-      const det=el("details"); det.appendChild(el("summary",null,"Voir les "+(ev.length-show.length)+" autres"));
-      const ul=el("ul"); ev.slice(show.length).forEach(e=>ul.appendChild(item(e))); det.appendChild(ul);
-      list.parentNode.appendChild(det);
+    ev.slice(0,8).forEach(e=>list.appendChild(item(e)));
+    if(ev.length>8){
+      const det=el("details"); det.appendChild(el("summary",null,"Voir les "+(ev.length-8)+" autres"));
+      const ul=el("ul","evlist"); ev.slice(8).forEach(e=>ul.appendChild(item(e))); det.appendChild(ul);
+      $("aujourdhui").appendChild(det);
     }
-    list.parentNode.appendChild(el("p","meta","Source : "+(d.source||"Ville de Montréal")+"."));
+    $("aujourdhui").appendChild(el("p","todaysrc","Source : "+(d.source||"Ville de Montréal")+"."));
   }).catch(()=>{meta.textContent="Activités du jour indisponibles pour le moment.";});
 })();
 
@@ -153,21 +210,22 @@ function host(u){try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){r
 function isOk(d){return /^confirmé/.test(d.statut);}
 function isFree(d){return d.free === "oui" || d.free === "enfants";}
 
+function hue(str){let h=0;for(const c of str)h=(h*31+c.charCodeAt(0))%360;return h;}
 function card(d){
   const c = el("article", "card"); c.id = d.id;
+  const bs = el("div", "badges");
+  const cp = el("span", "pill cat", d.cat); cp.style.setProperty("--h", hue(d.cat)); bs.appendChild(cp);
+  if (d.free === "oui") bs.appendChild(el("span", "pill free", "Gratuit"));
+  if (d.free === "enfants") bs.appendChild(el("span", "pill free", "Gratuit enfants"));
+  bs.appendChild(el("span", "pill " + (isOk(d) ? "open" : "reg"), isOk(d) ? d.statut : "À vérifier" + (d.src !== "tt" && d.statut !== "à vérifier" ? " : " + d.statut.replace(/^à vérifier\s*/,"") : "")));
+  if (!d.placed) bs.appendChild(el("span", "pill soft", "Hors carte"));
+  c.appendChild(bs);
   const h = el("h3"); h.appendChild(el("span", null, d.nom));
   const a = el("a", "anc", "#"); a.href = "#" + d.id; a.setAttribute("aria-label", "Lien vers cette fiche"); h.appendChild(a);
   c.appendChild(h);
-  const bs = el("div", "badges");
-  bs.appendChild(el("span", "b", d.cat));
-  if (d.free === "oui") bs.appendChild(el("span", "b free", "Gratuit"));
-  if (d.free === "enfants") bs.appendChild(el("span", "b free", "Gratuit pour les enfants"));
-  bs.appendChild(el("span", "b " + (isOk(d) ? "ok" : "warn"), isOk(d) ? d.statut : "À vérifier" + (d.src !== "tt" && d.statut !== "à vérifier" ? " : " + d.statut.replace(/^à vérifier\s*/,"") : "")));
-  if (!d.placed) bs.appendChild(el("span", "b", "Pas de repère sur la carte"));
-  c.appendChild(bs);
-  const dl = el("dl");
+  const dl = el("dl", "facts");
   [["Type", d.typ], ["Lieu", d.lieu], ["Âge", d.age], ["Prix", d.prix], ["Horaires", d.saison]].forEach(([k, v]) => {
-    dl.appendChild(el("dt", null, k)); dl.appendChild(el("dd", null, v || "n.d."));
+    dl.appendChild(el("dt", null, k)); dl.appendChild(el("dd", v ? null : "nd", v || "n.d."));
   });
   c.appendChild(dl);
   if (d.notes) c.appendChild(el("p", "notes", d.notes));
@@ -197,8 +255,12 @@ function render(){
       .filter(d => !ok || isOk(d))
       .filter(d => !q || (d.nom + " " + d.typ + " " + d.lieu + " " + d.cat + " " + d.notes).toLowerCase().includes(q));
     if (!items.length) return;
-    list.appendChild(el("h2", null, SRC[k] + " (" + items.length + ")"));
-    items.forEach(d => list.appendChild(card(d)));
+    const pn = el("section", "panel sec-" + k);
+    const h2 = el("h2"); h2.appendChild(el("span", "pill", SRC[k])); h2.appendChild(el("span", "n", items.length + " fiche" + (items.length > 1 ? "s" : "")));
+    pn.appendChild(h2);
+    const gr = el("div", "grid");
+    items.forEach(d => gr.appendChild(card(d)));
+    pn.appendChild(gr); list.appendChild(pn);
     n += items.length;
   });
   if (!n) list.appendChild(el("p", "empty", "Aucune fiche ne correspond à ces filtres."));
