@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Activités enfants – île de Montréal</title>
+<title>Montréal en famille, en un coup d'œil – activités enfants</title>
 <meta name="description" content="Liste d'activités pour enfants sur l'île de Montréal : musées, patinoires, plages, parcs, jeux d'eau. Filtres par âge, gratuité et statut de vérification.">
 <style>
 :root{--bg:#faf6ee;--card:#fff;--ink:#17181c;--mute:#5d6470;--line:#e6dfd0;--accent:#e4572e;--teal:#157f7f;--ok:#17703f;--okbg:#dff3e7;--warn:#8a5200;--warnbg:#ffe9c2;--free:#0d5a8a;--freebg:#dcedf9;
@@ -33,7 +33,7 @@ h1 span{display:block;color:var(--mute);font-size:.55em;letter-spacing:-.01em;fo
 .daybox{display:flex;align-items:baseline;gap:8px;line-height:1}
 .daybox .num{font-size:3.4rem;font-weight:800;letter-spacing:-.04em}
 .daybox .mon{font-size:1.2rem;font-weight:800;text-transform:uppercase;color:var(--accent)}
-.daybox .wd{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);margin-top:4px}
+.daybox .wd{font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);align-self:center}
 .todayhead h2{margin:0;font-size:1.1rem}
 .today .meta{font-size:.86rem;color:var(--mute);margin:0 0 12px}
 .evlist{list-style:none;margin:0;padding:0;display:grid;gap:4px 28px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
@@ -94,15 +94,15 @@ footer{margin-top:36px;font-size:.85rem;color:var(--mute)}
 <body>
 <div class="wrap">
 <header class="hero">
-  <span class="eyebrow">Famille · Montréal · gratuit ou pas cher</span>
-  <h1>Activités enfants<span>île de Montréal</span></h1>
+  <span class="eyebrow">Activités enfants · île de Montréal · gratuit ou pas cher</span>
+  <h1>Montréal en famille,<span>en un coup d'œil</span></h1>
   <p class="sub">Liste de travail : TikTok « montreal activite enfants », sites officiels (montreal.ca, Espace pour la vie, musées) et quelques sources tierces. Mise à jour : 25 novembre 2026.</p>
   <p class="legend">† = source tierce (pas le site officiel) · ‡ = info vue seulement sur TikTok · « n.d. » = non disponible, rien n'a été deviné. Les prix et horaires changent : confirmez avant de vous déplacer.</p>
 </header>
 
 <section class="today" id="aujourdhui" aria-live="polite">
   <div class="todayhead">
-    <div class="daybox"><span class="num" id="todayNum">–</span><span><span class="mon" id="todayMon"></span><span class="wd" id="todayWd"></span></span></div>
+    <div class="daybox"><span class="wd" id="todayWd"></span><span class="num" id="todayNum">–</span><span class="mon" id="todayMon"></span></div>
     <h2>Aujourd'hui pour les enfants</h2>
   </div>
   <p class="meta" id="todayMeta">Chargement…</p>
