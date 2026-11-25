@@ -14,7 +14,7 @@ Liste d'activités pour enfants sur l'île de Montréal (80 fiches) : musées, p
 4. Style par catégorie : colonne **Catégorie**.
 5. Vérifier les repères dont la colonne **Précision** vaut `nom` (placés d'après le nom du lieu, sans adresse).
 6. « Partager » : accès « Toute personne disposant du lien ». Puis menu ⋮ de la carte → « Intégrer sur mon site » et copier l'URL de l'attribut `src`.
-7. Coller cette URL dans `index.html`, constante `MAP_EMBED_URL`.
+7. Coller cette URL dans `index.html`, constante `MAP_EMBED_URL` (déjà fait : carte « carte activite montreal »).
 
 La colonne **Fiche (lien)** de chaque repère pointe vers la fiche correspondante de la page.
 
